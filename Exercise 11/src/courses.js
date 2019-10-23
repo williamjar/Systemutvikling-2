@@ -99,17 +99,6 @@ export class CourseDetails extends Component{
                             <Column width={2}>Title: </Column>
                             <Column width={6}>{course.title}</Column>
                         </Row>
-
-                    </Card>
-                    <Card title="Students">
-                        {studentsInCourse.map(e=>
-                            <Row>
-                                <Column width={4}>
-                                    {e.firstName} {e.lastName}
-                                </Column>
-                            </Row>
-
-                        )}
                     </Card>
                 </Card>
             </div>
@@ -143,7 +132,7 @@ export class addCourse extends Component{
             </div>
         )
     }
-
+//test
     addCourse(){
         let title = document.querySelector("#addCourseTitle").value;
         let courseCode = document.querySelector("#addCourseCode").value;
@@ -197,30 +186,7 @@ export class CourseEdit  extends Component<{ match: { params: { id: number } } }
                                     <Button.Danger onClick={this.deleteCourse}>Delete Course</Button.Danger>
                                 </Column>
                             </Row>
-
                         </form>
-
-                    </Card>
-                    <Card title="Attending students">
-                        {studentsInCourse.map(e=>
-                            <Row>
-                                <Column width={4}>
-                                    {e.firstName} {e.lastName}
-                                </Column>
-                                <Column width={2}>
-                                    <Button.Danger onClick={a => this.removeStudentFromCourse(e.id)}>X</Button.Danger>
-                                </Column>
-                            </Row>
-
-                        )}
-                    </Card>
-                    <Card title="Add student">
-                        <form>
-                            <select>
-                                {availableStudents.map(e=> <option id="addStudentFromCourses">{e.firstName + " " + e.lastName}</option>)}
-                            </select>
-                        </form>
-                        <Button.Success onClick={this.addStudentToCourse}>Add Student</Button.Success>
                     </Card>
                 </Card>
             </div>
@@ -241,6 +207,7 @@ export class CourseEdit  extends Component<{ match: { params: { id: number } } }
     }
 
 
+
     removeStudentFromCourse(id){
         let studentId = id;
         let student = students.find(e=> e.id == studentId);
@@ -250,12 +217,9 @@ export class CourseEdit  extends Component<{ match: { params: { id: number } } }
         student.removeCourse(course);
 
         history.push('/courses/'+ course.courseCode);
-
-
-
-
     }
 
+    /*
     addStudentToCourse(){
         let selectedStudent = document.querySelector("#addStudentFromCourses").value;
         let course = courses.find(course => course.courseCode === this.props.match.params.courseCode);
@@ -265,6 +229,7 @@ export class CourseEdit  extends Component<{ match: { params: { id: number } } }
         student.attendCourse(course);
         history.push('/courses/'+ course.courseCode);
     }
+    */
 
     deleteCourse(){
         let course = courses.find(course => course.courseCode === this.props.match.params.courseCode);

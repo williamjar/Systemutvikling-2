@@ -8,9 +8,6 @@ import { CourseDetails, CourseList, courses } from './courses';
 import { createHashHistory } from 'history';
 const history = createHashHistory(); // Use history.push(...) to programmatically change path, for instance after successfully saving a student
 
-
-
-
 class Student {
     id: number;
     static nextId = 1;
@@ -19,6 +16,7 @@ class Student {
     firstName: string;
     lastName: string;
     email: string;
+
 
     attendCourse(course){
         this.courseList.push(course);
@@ -40,8 +38,8 @@ class Student {
     }
 }
 export let students = [
-    new Student('Ola', 'Jensen', 'ola.jensen@ntnu.no'),
-    new Student('Kari', 'Larsen', 'kari.larsen@ntnu.no')
+    new Student('Ola', 'Nordmann', 'ola.jensen@ntnu.no'),
+    new Student('Kari', 'Navnesen', 'kari.larsen@ntnu.no')
 ];
 
 export class addStudent extends Component{
@@ -84,8 +82,6 @@ export class addStudent extends Component{
         let student = new Student(firstName,lastName,email);
         students.push(student);
         history.push('/students/');
-
-
     }
 }
 
@@ -153,14 +149,6 @@ export class StudentDetails extends Component<{ match: { params: { id: number } 
                             <Column>{student.email}</Column>
                         </Row>
                     </Card>
-                    <Card title={"Attends courses"}>
-                        {courses.map(e =>
-                            <Row>
-                                <Column width={6}>{e.title}</Column>
-                                <Column width={4}>{e.courseCode}</Column>
-                            </Row>
-                        )}
-                    </Card>
                 </Card>
             </div>
         );
@@ -168,10 +156,10 @@ export class StudentDetails extends Component<{ match: { params: { id: number } 
 }
 
 export class StudentEdit extends Component<{ match: { params: { id: number } } }> {
-    firstName = ''; // Always initialize component member variables
+    firstName = '';
     lastName = '';
     email = '';
-    attendsCourses = [];
+
 
 
 
@@ -227,35 +215,7 @@ export class StudentEdit extends Component<{ match: { params: { id: number } } }
 
                     </form>
                 </Card>
-                <Card title={"Courses"}>
-                    {this.attendsCourses.map(e =>
-                        <Row>
-                            <Column width={6}>
-                                {e.title}
-                            </Column>
-                            <Column width={2}>
-                                {e.courseCode}
-                            </Column>
-                            <Column width={2}>
-                                <Button.Danger id={e.courseCode} onClick={a => this.removeStudent(e.courseCode)}>X</Button.Danger>
-                            </Column>
-                        </Row>
-                    )}
-                </Card>
-                <Card title="Add course">
-                    <Row>
-                        <Column width={4}>
-                            <form>
-                                <select id={"selectCourse"}>
-                                    {availableCourses.map((e,index)=> <option>{e.title}</option>)}
-                                </select>
-                            </form>
-                        </Column>
-                        <Column width={4}>
-                            <Button.Success onClick={this.addCourse}>Add</Button.Success>
-                        </Column>
-                    </Row>
-                </Card>
+
             </Card>
         );
     }
@@ -296,13 +256,10 @@ export class StudentEdit extends Component<{ match: { params: { id: number } } }
         let courseCode = id;
         let student = students.find(student => student.id == this.props.match.params.id);
         let course = courses.find(course => course.courseCode == courseCode);
-
         //remove course from student's list
         student.removeCourse(course);
-
         //remove student from course's list
         course.removeStudent(student);
-
         //go back to details
         history.push('/students/' + student.id);
 
