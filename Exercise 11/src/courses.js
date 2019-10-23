@@ -202,7 +202,7 @@ export class CourseEdit  extends Component<{ match: { params: { id: number } } }
                         </form>
 
                     </Card>
-
+//test
                     <Card title="Attending students">
                         {studentsInCourse.map(e=>
                             <Row>
