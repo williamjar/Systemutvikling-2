@@ -77,7 +77,6 @@ class NavBarLink extends Component<{ exact?: boolean, to: string, children?: Rea
  */
 export class NavBar extends Component<{ brand?: React.Node, children?: React.Node }> {
     static Link = NavBarLink;
-
     render() {
         return (
             <nav className="navbar navbar-expand-sm bg-light navbar-light">
@@ -91,7 +90,6 @@ export class NavBar extends Component<{ brand?: React.Node, children?: React.Nod
         );
     }
 }
-
 /**
  * Renders an information card using Bootstrap classes
  */

@@ -91,7 +91,6 @@ export class CourseDetails extends Component{
                 <Card title={course.courseCode}>
                     <Card title="Course Details:">
 
-
                         <Row>
                             <Column width={2}>Course code:</Column>
                             <Column width={6}>{course.courseCode}</Column>
@@ -202,7 +201,6 @@ export class CourseEdit  extends Component<{ match: { params: { id: number } } }
                         </form>
 
                     </Card>
-//test
                     <Card title="Attending students">
                         {studentsInCourse.map(e=>
                             <Row>
@@ -241,6 +239,7 @@ export class CourseEdit  extends Component<{ match: { params: { id: number } } }
         this.courseCode = course.courseCode;
 
     }
+
 
     removeStudentFromCourse(id){
         let studentId = id;
@@ -294,5 +293,4 @@ export class CourseEdit  extends Component<{ match: { params: { id: number } } }
         // Go to StudentDetails after successful save
         history.push('/courses/' + course.courseCode);
     }
-
 }
